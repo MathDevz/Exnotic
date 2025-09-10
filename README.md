@@ -42,6 +42,7 @@ The project includes a `vercel.json` configuration file:
   "version": 2,
   "name": "exnotic",
   "buildCommand": "npm run build",
+  "installCommand": "npm install",
   "outputDirectory": "dist/public",
   "functions": {
     "api/**/*.js": {
@@ -69,7 +70,7 @@ The project includes a `vercel.json` configuration file:
   ],
   "rewrites": [
     {
-      "source": "/(?!api/).*",
+      "source": "/((?!api).*)",
       "destination": "/index.html"
     }
   ]
