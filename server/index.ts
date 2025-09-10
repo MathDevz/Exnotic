@@ -36,6 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Initialize the app for both environments
 (async () => {
   const server = await registerRoutes(app);
 
@@ -56,9 +57,9 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // For Vercel deployment, don't start a server - Vercel will handle the app
+  // For Replit and local development, start the server normally
+  // For Vercel, skip starting server (Vercel handles it)
   if (!process.env.VERCEL) {
-    // For Replit and local development, start the server normally
     const port = parseInt(process.env.PORT || '5000', 10);
     server.listen({
       port,
@@ -68,12 +69,7 @@ app.use((req, res, next) => {
       log(`serving on port ${port}`);
     });
   }
+})();
 
-  // Export the Express app for Vercel serverless functions (ES module compatible)
-  return app;
-})().then((exportedApp) => {
-  if (process.env.VERCEL && typeof globalThis !== 'undefined') {
-    // Make the app available for Vercel
-    (globalThis as any).app = exportedApp;
-  }
-});
+// Export the Express app for Vercel serverless functions
+export default app;
