@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "exnotic",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "functions": {
+    "dist/index.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/dist/index.js"
+    }
+  ]
+}
