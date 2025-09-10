@@ -44,11 +44,6 @@ The project includes a `vercel.json` configuration file:
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "outputDirectory": "dist/public",
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -80,9 +75,10 @@ The project includes a `vercel.json` configuration file:
 ### Configuration Explanation
 
 - **`outputDirectory: "dist/public"`**: Vite builds the frontend to this directory
-- **`functions`**: Configures serverless functions in `/api` directory with Node.js 18
 - **`headers`**: Enables CORS for API endpoints
 - **`rewrites`**: Routes all non-API requests to index.html for SPA routing
+
+Note: Serverless functions in `/api` directory are automatically detected by Vercel.
 
 ## Local Testing with Vercel CLI
 
